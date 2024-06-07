@@ -152,8 +152,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-<<<<<<< HEAD
-=======
   js:
     dependency: transitive
     description:
@@ -162,7 +160,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.1"
->>>>>>> ffd06872f1fc285cf255764561a9684dd187d02f
   json_annotation:
     dependency: transitive
     description:
