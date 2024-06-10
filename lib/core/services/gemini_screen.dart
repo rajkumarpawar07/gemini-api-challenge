@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
@@ -35,6 +34,8 @@ class _GeminiScreenState extends State<GeminiScreen> {
 
   void _sendMsg() {
     List<File> files = [];
+    // TODO: Handle what to do with the response from Gemini
+    // Note that the response is in JSON format
     String response = callGeminiAPIAnalyzeImage("Hello there", files, gemini);
   }
 }

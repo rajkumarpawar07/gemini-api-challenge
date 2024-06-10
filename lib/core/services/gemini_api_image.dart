@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:gemini_api_challenge/core/constants/const.dart';
 
+// TODO: Convert image user posts into files
 String callGeminiAPIAnalyzeImage(
   String userMsg,
   List<File> files,
