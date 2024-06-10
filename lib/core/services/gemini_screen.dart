@@ -5,7 +5,7 @@ import 'package:gemini_api_challenge/core/services/gemini_api_image.dart';
 
 // Some new package installed is: Flutter_gemini,
 // https://pub.dev/packages/flutter_gemini#getting-started
-// This screen is mostly for testing, the result from Gemini API will be available in debug console
+// This screen is mostly for testing the Gemini API
 
 class GeminiScreen extends StatefulWidget {
   const GeminiScreen({super.key});
