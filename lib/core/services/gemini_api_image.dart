@@ -12,6 +12,9 @@ String callGeminiAPIAnalyzeImage(
   Gemini gemini,
 ) {
   // Some default init params are available in the main.dart and const.dart file
+  // Below is calling api and get the response but if you want to do it in real time
+  // like making the text appear continuously, read the documentation.
+  // https://pub.dev/packages/flutter_gemini#stream-generate-content
   String question = userMsg;
   String resposne = "";
   question += initalStructurePromtImage;
