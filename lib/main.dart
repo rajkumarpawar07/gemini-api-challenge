@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gemini_api_challenge/app/speech_manager.dart';
+import 'package:gemini_api_challenge/core/utils/app_extensions.dart';
+import 'package:gemini_api_challenge/features/camera/presentation/camera_screen.dart';
 import 'package:gemini_api_challenge/features/chatbot/presentation/chat_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,6 +41,14 @@ class MyApp extends StatelessWidget {
           isDense: true,
           contentPadding: EdgeInsets.zero,
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            shadowColor: Colors.transparent,
+            backgroundColor: const Color(0xffD3B4ED),
+            foregroundColor: Colors.black,
+          ),
+        ),
       ),
       home: const MyHomePage(),
     );
@@ -61,82 +71,98 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Spacer(),
-            Text(
-              'Text To Speech',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            ValueListenableBuilder<bool>(
-              valueListenable: textManager.speechState,
-              builder: (context, value, child) {
-                return Column(
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        if (!value) {
-                          textManager.run(content ??
-                              'This sunbird has an injury on its leg. It requires care from a hospital.');
-                        } else {
-                          textManager.stop();
-                        }
-                      },
-                      child: Text(
-                        !value ? 'Play' : 'Pause',
-                      ),
-                    ),
-                    Text('Play State: $value'),
-                  ],
-                );
-              },
-            ),
-            const Spacer(),
-            Text(
-              'Speech To Text',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            ValueListenableBuilder<bool>(
-                valueListenable: speechManager.speechState,
+        child: Padding(
+          padding: Dimens.horizontalPadding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Spacer(),
+              Text(
+                'Text To Speech',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              ValueListenableBuilder<bool>(
+                valueListenable: textManager.speechState,
                 builder: (context, value, child) {
                   return Column(
                     children: [
                       TextButton(
                         onPressed: () {
-                          if (speechManager.isRunning) {
-                            return speechManager.stop();
+                          if (!value) {
+                            textManager.run(content ??
+                                'This sunbird has an injury on its leg. It requires care from a hospital.');
+                          } else {
+                            textManager.stop();
                           }
-                          speechManager.run(
-                            (text) {
-                              setState(() {
-                                content = text;
-                              });
-                            },
-                          );
                         },
-                        child: Text(!value ? 'Listen' : 'Stop'),
+                        child: Text(
+                          !value ? 'Play' : 'Pause',
+                        ),
                       ),
-                      Text('Speech: $content'),
+                      Text('Play State: $value'),
                     ],
                   );
-                }),
-            const Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ChatScreen(),
-                  ),
-                );
-              },
-              child: const Text(
-                'ChatBot',
+                },
               ),
-            ),
-          ],
+              const Spacer(),
+              Text(
+                'Speech To Text',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              ValueListenableBuilder<bool>(
+                  valueListenable: speechManager.speechState,
+                  builder: (context, value, child) {
+                    return Column(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            if (speechManager.isRunning) {
+                              return speechManager.stop();
+                            }
+                            speechManager.run(
+                              (text) {
+                                setState(() {
+                                  content = text;
+                                });
+                              },
+                            );
+                          },
+                          child: Text(!value ? 'Listen' : 'Stop'),
+                        ),
+                        Text('Speech: $content'),
+                      ],
+                    );
+                  }),
+              const Spacer(),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CameraScreen(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'CameraScreen',
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ChatScreen(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'ChatBot',
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
